@@ -17,7 +17,7 @@ class ProductTest < ActiveSupport::TestCase
 
   test "product price must be positive" do
     product = Product.new(title:       "My Book Title",
-                          description: "yyy",
+                          description: products(:ruby).description,
                           image_url:   "zzz.jpg")
     product.price = -1
     assert product.invalid?
@@ -35,7 +35,7 @@ class ProductTest < ActiveSupport::TestCase
 
   def new_product(image_url)
     Product.new(title:        "My Book Title",
-                description:  "yyy",
+                description:  products(:ruby).description,
                 price:        1,
                 image_url:    image_url)
   end
@@ -53,10 +53,22 @@ class ProductTest < ActiveSupport::TestCase
 
     test "product is not valid without a unique title - i18n" do
       product = Product.new(title:        products(:ruby).title,
-                            description:  "yyy",
+                            description:  products(:ruby).description,
                             price:        1,
                             image_url:    "fred.gif")
       assert product.invalid?
       assert_equal [I18n.translate( 'errors.messages.taken' )], product.errors[:title]
+    end
+
+      test "product description is a minimum of 10 characters in length" do
+      product = Product.new(title:        "My Book Title",
+                            price:        1,
+                            image_url:    "fred.gif")
+
+      product.description = "yyy"
+      assert product.invalid?
+
+      product.description = products(:ruby).description
+      assert product.valid?
     end
 end

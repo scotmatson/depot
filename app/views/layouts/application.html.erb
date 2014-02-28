@@ -20,6 +20,12 @@
           <li><a href="http://www.../news">News</a></li>
           <li><a href="http://www.../contact">Contact</a></li>
         </ul>
+        <section id="new_products">
+          <h2>New to the Store</h2>
+
+          <%= Product.latest.title %>
+          <%= image_tag(Product.latest.image_url) %>
+        </section>
       </div>
 
       <div id="main">
