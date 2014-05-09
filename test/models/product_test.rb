@@ -4,6 +4,7 @@ class ProductTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
   fixtures :products
 
   test "product attributes must not be empty" do
@@ -60,7 +61,7 @@ class ProductTest < ActiveSupport::TestCase
       assert_equal [I18n.translate( 'errors.messages.taken' )], product.errors[:title]
     end
 
-      test "product description is a minimum of 10 characters in length" do
+    test "product description is a minimum of 10 characters in length" do
       product = Product.new(title:        "My Book Title",
                             price:        1,
                             image_url:    "fred.gif")
