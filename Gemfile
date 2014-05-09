@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use sqlite3 as the database for testing
+# gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -44,3 +44,16 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Use sqlite3 for testing environment
+group :development, :test do
+  gem 'sqlite3'
+end
+
+# Use postgres for heroku production environment
+group :production do
+  gem 'pg'
+end
+
+# Gemfile specific to heroku
+gem 'rails_12factor', group: :production
